@@ -1,0 +1,94 @@
+/* Protected viewer styles for mod_pdfdocument. */
+
+.pdfdocument-viewer {
+    /* Deter casual text/image selection across the whole viewer. */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    max-width: 100%;
+}
+
+.pdfdocument-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: var(--light, #f8f9fa);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.pdfdocument-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.pdfdocument-toolbar-group-end {
+    margin-left: auto;
+}
+
+.pdfdocument-pageinfo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+.pdfdocument-pagenum {
+    width: 3.5rem;
+    text-align: center;
+}
+
+.pdfdocument-pages {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+}
+
+.pdfdocument-page {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+    /* Block the image drag-to-save gesture. */
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.pdfdocument-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2rem;
+}
+
+/* Print protection fallback: if the browser print dialog is reached anyway,
+   the document pages are blanked so nothing usable is printed. */
+@media print {
+    .pdfdocument-viewer {
+        display: none !important;
+    }
+    body::after {
+        content: "";
+    }
+}
+
+/* Responsive: on narrow viewports keep the toolbar reachable and pages fit. */
+@media (max-width: 480px) {
+    .pdfdocument-toolbar {
+        justify-content: center;
+    }
+    .pdfdocument-toolbar-group-end {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,71 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_pdfdocument/viewer
+
+    Protected PDF viewer scaffold. The canvas pages are rendered by the
+    mod_pdfdocument/viewer AMD module. Deliberately contains no download,
+    print or open-in-new-tab controls.
+
+    Example context (json):
+    {
+        "loadinglabel": "Loading document…",
+        "errorlabel": "This document cannot be displayed.",
+        "pagelabel": "Page",
+        "oflabel": "of",
+        "prevlabel": "Previous page",
+        "nextlabel": "Next page",
+        "zoominlabel": "Zoom in",
+        "zoomoutlabel": "Zoom out",
+        "fitwidthlabel": "Fit width"
+    }
+}}
+<div class="pdfdocument-viewer" data-region="pdfdocument-viewer">
+    <div class="pdfdocument-toolbar" role="toolbar" aria-label="{{pagelabel}}">
+        <div class="pdfdocument-toolbar-group">
+            <button type="button" class="btn btn-secondary btn-sm" data-action="prev"
+                    aria-label="{{prevlabel}}" title="{{prevlabel}}">&#9664;</button>
+            <span class="pdfdocument-pageinfo">
+                {{pagelabel}}
+                <input type="number" min="1" value="1" class="pdfdocument-pagenum"
+                       data-region="pagenum" aria-label="{{pagelabel}}" />
+                {{oflabel}} <span data-region="pagecount">–</span>
+            </span>
+            <button type="button" class="btn btn-secondary btn-sm" data-action="next"
+                    aria-label="{{nextlabel}}" title="{{nextlabel}}">&#9654;</button>
+        </div>
+        <div class="pdfdocument-toolbar-group">
+            <button type="button" class="btn btn-secondary btn-sm" data-action="zoomout"
+                    aria-label="{{zoomoutlabel}}" title="{{zoomoutlabel}}">&#8722;</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-action="fitwidth"
+                    aria-label="{{fitwidthlabel}}" title="{{fitwidthlabel}}">&#8596;</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-action="zoomin"
+                    aria-label="{{zoominlabel}}" title="{{zoominlabel}}">&#43;</button>
+        </div>
+    </div>
+
+    <div class="pdfdocument-loading" data-region="loading" aria-live="polite">
+        <div class="spinner-border" role="status" aria-hidden="true"></div>
+        <span>{{loadinglabel}}</span>
+    </div>
+
+    <div class="pdfdocument-error alert alert-danger" data-region="error" role="alert" hidden>
+        {{errorlabel}}
+    </div>
+
+    <div class="pdfdocument-pages" data-region="pages"></div>
+</div>

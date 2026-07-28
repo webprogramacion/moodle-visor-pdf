@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<libraries>
+    <library>
+        <location>js/pdfjs</location>
+        <name>PDF.js</name>
+        <description>Mozilla PDF.js library used to render PDF pages to canvas in the protected viewer.</description>
+        <version>4.10.38</version>
+        <license>Apache-2.0</license>
+        <licenseversion>2.0</licenseversion>
+    </library>
+</libraries>
